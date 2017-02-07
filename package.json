@@ -1,0 +1,23 @@
+{
+  "name": "react-native-fcm",
+  "version": "1.0.0",
+  "description": "FCM Implementation for React Native",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios",
+    "android",
+    "notifications",
+    "push",
+    "fcm"
+  ],
+  "peerDependencies": {
+    "react-native": ">=0.20"
+  },
+  "author": "Radish",
+  "license": "MIT"
+}
