@@ -64,28 +64,21 @@ public class MyFirebaseInstanceIDService extends ReactContextBaseJavaModule {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
-        // TODO: Implement this method to send any registration to your app's servers.
-        sendRegistrationToServer(refreshedToken);
+        // Send the token to ReactNative whenever the token is refreshed.
+        sendTokenToReactNative(refreshedToken);
     }
     // [END refresh_token]
 
-    /**
-     * Persist token to third-party servers.
-     *
-     * Modify this method to associate the user's FCM InstanceID token with any server-side account
-     * maintained by your application.
-     *
-     * @param token The new token.
-     */
-    private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
+    private void sendTokenToReactNative(String token){
+        if( token == null ) return;
+        WritableMap params = Arguments.createMap();
+        params.putString("deviceToken", token);
+        sendEvent("RNFcmEventRefreshToken", params);
     }
 
     @ReactMethod
     public void requestPermissions() {
       String token = FirebaseInstanceId.getInstance().getToken();
-      WritableMap params = Arguments.createMap();
-      params.putString("deviceToken", token);
-      sendEvent("RNFcmEventRefreshToken", params);
+      sendTokenToReactNative(token);
     }
 }
